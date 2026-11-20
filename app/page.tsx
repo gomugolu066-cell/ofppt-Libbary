@@ -10,30 +10,25 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen p-6 relative">
-      
-      {/* الأزرار مثبتة في أعلى اليسار دائماً */}
       <LanguageSwitcher currentLang={lang} />
 
       <div className="max-w-6xl mx-auto pt-12">
         <header className="text-center mb-10 flex flex-col items-center">
-          
-          {/* الشعار صغير وفي المنتصف */}
           <div className="mb-6">
             <OfpptLogo className="w-28 h-auto drop-shadow-sm" />
           </div>
 
           <h1 className="text-4xl font-bold text-blue-900 mb-4">
-            {isAr ? "منصة OFPPT الرقمية" : "Plateforme OFPPT Digitale"}
+            {isAr ? "OFPPT Digital Platform" : "Plateforme OFPPT Digitale"}
           </h1>
           <p className="text-gray-600 text-lg">
             {isAr 
-              ? "اختر التخصص لعرض الفروع والوحدات الخاصة به" 
+              ? "Select a specialty to view its branches and modules" 
               : "Sélectionnez une spécialité pour voir ses branches et modules"}
           </p>
         </header>
 
         <SpecialtyTree lang={lang} />
-        
       </div>
     </main>
   )

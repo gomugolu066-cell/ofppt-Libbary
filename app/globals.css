@@ -10,6 +10,7 @@ body {
   padding: 0;
 }
 
+/* --- الحركات القديمة (الخاصة بالبطاقات والأيقونات) --- */
 @keyframes paperAnim {
   0% { transform: translateY(15px); opacity: 0; }
   20% { transform: translateY(-12px); opacity: 1; }
@@ -48,3 +49,31 @@ body {
   50% { transform: translateY(-6px); }
 }
 .anim-float { animation: floatAnim 2s ease-in-out infinite; }
+
+/* --- الحركات الجديدة (الخاصة بالشعار) --- */
+@keyframes slideLeftAnim {
+  0% { transform: translateX(100px); opacity: 0; }
+  30% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-50px); opacity: 1; }
+}
+.anim-slide-left { animation: slideLeftAnim 2s ease-out forwards; }
+
+@keyframes slideRightAnim {
+  0% { transform: translateX(-100px); opacity: 0; }
+  30% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(50px); opacity: 1; }
+}
+.anim-slide-right { animation: slideRightAnim 2s ease-out forwards; }
+
+@keyframes fadeUpAnim {
+  0% { transform: translateY(20px); opacity: 0; }
+  50% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.anim-fade-up { animation: fadeUpAnim 2.5s ease-out forwards; }
+
+@keyframes pulseGray {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+.anim-pulse-gray { animation: pulseGray 3s ease-in-out infinite; }

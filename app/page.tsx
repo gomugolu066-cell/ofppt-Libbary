@@ -29,6 +29,51 @@ export default async function Home() {
         </header>
 
         <SpecialtyTree lang={lang} />
+        
+        <div className="mt-20 pt-8 border-t border-gray-200 text-center text-sm text-gray-400">
+          <h2 className="font-semibold text-gray-500 mb-4">
+            {isAr ? "المناطق التي نغطيها" : "Régions couvertes"} (ISTA & CMC)
+          </h2>
+          
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mb-6">
+            <span>الدار البيضاء (Casablanca)</span> • 
+            <span>الرباط (Rabat)</span> • 
+            <span>مراكش (Marrakech)</span> • 
+            <span>فاس (Fès)</span> • 
+            <span>طنجة (Tanger)</span> • 
+            <span>أكادير (Agadir)</span> • 
+            <span>مكناس (Meknès)</span> • 
+            <span>وجدة (Oujda)</span> • 
+            <span>القنيطرة (Kénitra)</span> • 
+            <span>تطوان (Tétouan)</span> • 
+            <span>سلا (Salé)</span> • 
+            <span>آسفي (Safi)</span> • 
+            <span>الجديدة (El Jadida)</span> • 
+            <span>بني ملال (Béni Mellal)</span> • 
+            <span>الناظور (Nador)</span> • 
+            <span>خريبكة (Khouribga)</span> • 
+            <span>العيون (Laâyoune)</span> • 
+            <span>المحمدية (Mohammedia)</span> • 
+            <span>تازة (Taza)</span> • 
+            <span>الحسيمة (Al Hoceima)</span>
+          </div>
+
+          <h2 className="font-semibold text-gray-500 mb-2 mt-6">
+            {isAr ? "تخصصات متوفرة" : "Spécialités disponibles"}
+          </h2>
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1">
+            <span>Développement Digital</span> • 
+            <span>Gestion des Entreprises</span> • 
+            <span>Comptabilité et Finance</span> • 
+            <span>Infographie</span> • 
+            <span>Technique de Réseaux</span> • 
+            <span>Électromécanique</span> • 
+            <span>Froid et Génie Thermique</span> • 
+            <span>Marketing Digital</span> • 
+            <span>Ressources Humaines</span> • 
+            <span>Logistique</span>
+          </div>
+        </div>
       </div>
     </main>
   )

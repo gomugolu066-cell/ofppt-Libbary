@@ -15,7 +15,8 @@ export default async function Home() {
       <div className="max-w-6xl mx-auto pt-12">
         <header className="text-center mb-10 flex flex-col items-center">
           <div className="mb-6">
-            <OfpptLogo className="w-28 h-auto drop-shadow-sm" />
+            {/* تم تصغير الشعار هنا ليصبح أنيقاً */}
+            <OfpptLogo className="w-20 h-auto drop-shadow-md" />
           </div>
 
           <h1 className="text-4xl font-bold text-blue-900 mb-4">
@@ -30,6 +31,7 @@ export default async function Home() {
 
         <SpecialtyTree lang={lang} />
         
+        {/* قسم المناطق والتخصصات لتحسين محركات البحث */}
         <div className="mt-20 pt-8 border-t border-gray-200 text-center text-sm text-gray-400">
           <h2 className="font-semibold text-gray-500 mb-4">
             {isAr ? "المناطق التي نغطيها" : "Régions couvertes"} (ISTA & CMC)

@@ -12,12 +12,14 @@ export default async function Home() {
     <main className="min-h-screen p-6 relative">
       <LanguageSwitcher currentLang={lang} />
 
-      <div className="max-w-6xl mx-auto pt-12">
+      <div className="max-w-6xl mx-auto pt-8">
         <header className="text-center mb-10 flex flex-col items-center">
           
-          {/* الشعار الآن بحجم صغير جداً (60 بكسل) */}
-          <div className="mb-4">
-            <OfpptLogo className="w-[60px] h-auto drop-shadow-sm mx-auto" />
+          {/* هنا قمنا بحصر الشعار في مساحة صغيرة جداً (50 بكسل) ووضعه في المنتصف */}
+          <div className="mb-4 flex justify-center w-full">
+            <div className="w-[50px]">
+              <OfpptLogo className="w-full h-auto drop-shadow-sm" />
+            </div>
           </div>
 
           <h1 className="text-4xl font-bold text-blue-900 mb-4">

@@ -1,4 +1,4 @@
-export default function OfpptLogo({ className = "w-32 h-auto" }: { className?: string }) {
+export default function OfpptLogo({ className = "w-[60px] h-auto" }: { className?: string }) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 

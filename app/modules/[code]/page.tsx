@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, FileText, Download } from 'lucide-react'
-import ModuleAdOverlay from '@/app/components/ModuleAdOverlay' // <-- تمت إضافة الإعلان هنا
+import ModuleAdOverlay from '@/app/components/ModuleAdOverlay'
 
 export default async function ModulePage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params
@@ -11,9 +11,22 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
   const lang = cookieStore.get('lang')?.value || 'ar'
   const isAr = lang === 'ar'
 
+  // 1. قائمة الملفات التي رفعتها إلى مجلد public
+  const oqeOemFiles = [
+    { title: "Présentation Pneumatique", file: "/OQEOEM_Présentation%20Pneumatique%20M204%20OQE%20OEM-compressé.pdf" },
+    { title: "Manuel de cours (Entretien)", file: "/OQEOEM_Manuel%20de%20cours_TEI%20-%20entretien%20de%20dispositif%20de%20transmission%20de%20mouvement-compressé.pdf" },
+    { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires%20de%20transmission%20et%20de%20transformation%20du%20mouvement-compressé.pdf" }
+  ]
+
+  // 2. التحقق: إذا كان الكود يحتوي على OQE أو OEM (سواء بمسافة أو بدون)
+  const upperCode = decodedCode.toUpperCase();
+  const isTargetSpecialty = upperCode.includes("OQE") || upperCode.includes("OEM");
+  
+  // 3. تحديد الملفات التي سيتم عرضها
+  const currentFiles = isTargetSpecialty ? oqeOemFiles : null;
+
   return (
     <main className="min-h-screen p-6 bg-slate-50">
-      {/* تم وضع مكون الإعلان هنا ليظهر فوق كل شيء في هذه الصفحة */}
       <ModuleAdOverlay />
 
       <div className="max-w-4xl mx-auto pt-10">
@@ -36,17 +49,50 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
           </span>
         </div>
 
-        {/* القسم الثاني: حالة الملف (بناءً على تصميمك) */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center flex flex-col items-center justify-center min-h-[300px]">
-          <Download size={48} className="text-gray-300 mb-6" />
-          <h2 className="text-2xl font-bold text-gray-700 mb-3">
-            {isAr ? "المحتوى غير متوفر حالياً" : "Cours non encore disponible"}
-          </h2>
-          <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
-            {isAr 
-              ? "لم يتم رفع ملف PDF الخاص بهذه الوحدة بعد. يرجى العودة لاحقاً."
-              : "Le fichier PDF de ce module n'a pas encore été téléchargé. Veuillez revenir plus tard."}
-          </p>
+        {/* القسم الثاني: عرض الملفات أو رسالة عدم التوفر */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center flex flex-col items-center min-h-[300px]">
+          
+          {currentFiles ? (
+            // عرض الأزرار إذا كان الكود يحتوي على OQE أو OEM
+            <div className="w-full">
+              <Download size={48} className="text-blue-500 mb-6 mx-auto" />
+              <h2 className="text-2xl font-bold text-gray-700 mb-6">
+                {isAr ? "الملفات متوفرة للتحميل" : "Fichiers disponibles au téléchargement"}
+              </h2>
+              
+              <div className="flex flex-col gap-3 max-w-2xl mx-auto">
+                {currentFiles.map((item, index) => (
+                  <a 
+                    key={index}
+                    href={item.file} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-blue-50 border border-blue-200 text-blue-700 font-bold py-3 px-4 rounded-lg hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-between group text-left"
+                    dir="ltr"
+                  >
+                    <span className="flex items-center gap-2">
+                      <FileText size={20} className="group-hover:text-white shrink-0" />
+                      <span className="text-sm md:text-base">{item.title}</span>
+                    </span>
+                    <Download size={20} className="shrink-0" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // عرض رسالة "غير متوفر" لباقي التخصصات
+            <>
+              <Download size={48} className="text-gray-300 mb-6" />
+              <h2 className="text-2xl font-bold text-gray-700 mb-3">
+                {isAr ? "المحتوى غير متوفر حالياً" : "Cours non encore disponible"}
+              </h2>
+              <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
+                {isAr 
+                  ? "لم يتم رفع ملف PDF الخاص بهذه الوحدة بعد. يرجى العودة لاحقاً."
+                  : "Le fichier PDF de ce module n'a pas encore été téléchargé. Veuillez revenir plus tard."}
+              </p>
+            </>
+          )}
         </div>
 
       </div>

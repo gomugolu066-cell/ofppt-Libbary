@@ -11,16 +11,16 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
   const lang = cookieStore.get('lang')?.value || 'ar'
   const isAr = lang === 'ar'
 
-  // 1. قائمة الملفات
+  // 1. قائمة الملفات (تم تعديل اسم الملف الأول ليطابق ما رفعته)
   const oqeOemFiles = [
-    { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation%20Pneumatique.pdf" },
+    { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation_Pneumatique.pdf" },
     { title: "Manuel de cours (Entretien)", file: "/OQEOEM_cours_TEI.pdf" },
     { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires.pdf" }
   ]
 
-  // 2. المطابقة الذكية: أي كود يحتوي على الكلمات المفتاحية كجزء مستقل
+  // 2. المطابقة المرنة: أي كود يحتوي على الكلمات المفتاحية حتى لو كانت ملتصقة
   const upperCode = decodedCode.toUpperCase().trim()
-  const isTargetSpecialty = /\b(OQOEM|OQE|OEM|GE|EI)\b/i.test(upperCode)
+  const isTargetSpecialty = /OQOEM|OQE|OEM|GE|EI/i.test(upperCode)
 
   // 3. تحديد الملفات المعروضة
   const currentFiles = isTargetSpecialty ? oqeOemFiles : null

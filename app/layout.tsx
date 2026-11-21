@@ -5,6 +5,9 @@ import { cookies } from 'next/headers';
 export const metadata: Metadata = {
   title: "منصة OFPPT الرقمية | Plateforme OFPPT",
   description: "مكتبتك الشاملة لجميع التخصصات والدروس بصيغة PDF",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default async function RootLayout({

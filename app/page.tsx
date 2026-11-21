@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+import Link from 'next/link' // تمت إضافة هذا السطر لتفعيل الروابط
 import LanguageSwitcher from './components/LanguageSwitcher'
 import SpecialtyTree from './components/SpecialtyTree'
 import OfpptLogo from './components/OfpptLogo'
@@ -64,7 +65,7 @@ export default async function Home() {
           <h2 className="font-semibold text-gray-500 mb-2 mt-6">
             {isAr ? "تخصصات متوفرة" : "Spécialités disponibles"}
           </h2>
-          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1">
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mb-8">
             <span>Développement Digital</span> • 
             <span>Gestion des Entreprises</span> • 
             <span>Comptabilité et Finance</span> • 
@@ -75,6 +76,13 @@ export default async function Home() {
             <span>Marketing Digital</span> • 
             <span>Ressources Humaines</span> • 
             <span>Logistique</span>
+          </div>
+
+          {/* رابط سياسة الخصوصية */}
+          <div className="pt-6 border-t border-gray-100 flex justify-center gap-4">
+            <Link href="/privacy" className="text-sm text-gray-500 hover:text-blue-600 hover:underline transition-colors">
+              {isAr ? "سياسة الخصوصية" : "Politique de Confidentialité"}
+            </Link>
           </div>
         </div>
       </div>

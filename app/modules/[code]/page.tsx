@@ -11,11 +11,11 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
   const lang = cookieStore.get('lang')?.value || 'ar'
   const isAr = lang === 'ar'
 
-  // 1. قائمة الملفات التي رفعتها إلى مجلد public
+  // 1. قائمة الملفات (تم تحديثها لتطابق أسماء الملفات التي رفعتها بالضبط)
   const oqeOemFiles = [
-    { title: "Présentation Pneumatique", file: "/OQEOEM_Présentation%20Pneumatique%20M204%20OQE%20OEM-compressé.pdf" },
-    { title: "Manuel de cours (Entretien)", file: "/OQEOEM_Manuel%20de%20cours_TEI%20-%20entretien%20de%20dispositif%20de%20transmission%20de%20mouvement-compressé.pdf" },
-    { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires%20de%20transmission%20et%20de%20transformation%20du%20mouvement-compressé.pdf" }
+    { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation Pneumatique.pdf" },
+    { title: "Manuel de cours (Entretien)", file: "/OQEOEM_cours_TEI.pdf" },
+    { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires.pdf" }
   ]
 
   // 2. التحقق: إذا كان الكود يحتوي على OQE أو OEM (سواء بمسافة أو بدون)
@@ -53,7 +53,6 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center flex flex-col items-center min-h-[300px]">
           
           {currentFiles ? (
-            // عرض الأزرار إذا كان الكود يحتوي على OQE أو OEM
             <div className="w-full">
               <Download size={48} className="text-blue-500 mb-6 mx-auto" />
               <h2 className="text-2xl font-bold text-gray-700 mb-6">
@@ -80,7 +79,6 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
               </div>
             </div>
           ) : (
-            // عرض رسالة "غير متوفر" لباقي التخصصات
             <>
               <Download size={48} className="text-gray-300 mb-6" />
               <h2 className="text-2xl font-bold text-gray-700 mb-3">

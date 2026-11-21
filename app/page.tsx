@@ -15,11 +15,9 @@ export default async function Home() {
       <div className="max-w-6xl mx-auto pt-8">
         <header className="text-center mb-10 flex flex-col items-center">
           
-          {/* هنا قمنا بحصر الشعار في مساحة صغيرة جداً (50 بكسل) ووضعه في المنتصف */}
+          {/* الشعار هنا - المكون نفسه يحتوي على الحجم المحدد بـ 60 بكسل */}
           <div className="mb-4 flex justify-center w-full">
-            <div className="w-[50px]">
-              <OfpptLogo className="w-full h-auto drop-shadow-sm" />
-            </div>
+            <OfpptLogo />
           </div>
 
           <h1 className="text-4xl font-bold text-blue-900 mb-4">

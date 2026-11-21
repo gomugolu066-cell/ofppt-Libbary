@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, FileText, Download } from 'lucide-react'
 import ModuleAdOverlay from '@/app/components/ModuleAdOverlay'
+import PdfViewer from '@/app/components/PdfViewer' // <-- تمت إضافة هذا السطر
 
 export default async function ModulePage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params
@@ -11,18 +12,14 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
   const lang = cookieStore.get('lang')?.value || 'ar'
   const isAr = lang === 'ar'
 
-  // 1. قائمة الملفات (تم تعديل اسم الملف الأول ليطابق ما رفعته)
   const oqeOemFiles = [
     { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation_Pneumatique.pdf" },
     { title: "Manuel de cours (Entretien)", file: "/OQEOEM_cours_TEI.pdf" },
     { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires.pdf" }
   ]
 
-  // 2. المطابقة المرنة: أي كود يحتوي على الكلمات المفتاحية حتى لو كانت ملتصقة
   const upperCode = decodedCode.toUpperCase().trim()
   const isTargetSpecialty = /OQOEM|OQE|OEM|GE|EI/i.test(upperCode)
-
-  // 3. تحديد الملفات المعروضة
   const currentFiles = isTargetSpecialty ? oqeOemFiles : null
 
   return (
@@ -30,13 +27,11 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
       <ModuleAdOverlay />
 
       <div className="max-w-4xl mx-auto pt-10">
-
         <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-8 transition-colors">
           {isAr ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
           {isAr ? "العودة للرئيسية" : "Retour à l'accueil"}
         </Link>
 
-        {/* القسم الأول: عنوان الموديل */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center mb-6">
           <div className="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <FileText size={32} />
@@ -49,9 +44,7 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
           </span>
         </div>
 
-        {/* القسم الثاني: عرض الملفات أو رسالة عدم التوفر */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center flex flex-col items-center min-h-[300px]">
-
           {currentFiles ? (
             <div className="w-full">
               <Download size={48} className="text-blue-500 mb-6 mx-auto" />
@@ -61,20 +54,8 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
 
               <div className="flex flex-col gap-3 max-w-2xl mx-auto">
                 {currentFiles.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-blue-50 border border-blue-200 text-blue-700 font-bold py-3 px-4 rounded-lg hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-between group text-left"
-                    dir="ltr"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FileText size={20} className="group-hover:text-white shrink-0" />
-                      <span className="text-sm md:text-base">{item.title}</span>
-                    </span>
-                    <Download size={20} className="shrink-0" />
-                  </a>
+                  // 🔴 هنا التغيير الأهم: استبدلنا <a> بـ <PdfViewer>
+                  <PdfViewer key={index} title={item.title} fileUrl={item.file} />
                 ))}
               </div>
             </div>
@@ -92,7 +73,6 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
             </>
           )}
         </div>
-
       </div>
     </main>
   )

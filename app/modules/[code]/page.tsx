@@ -6,31 +6,31 @@ import ModuleAdOverlay from '@/app/components/ModuleAdOverlay'
 export default async function ModulePage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params
   const decodedCode = decodeURIComponent(code)
-  
+
   const cookieStore = await cookies()
   const lang = cookieStore.get('lang')?.value || 'ar'
   const isAr = lang === 'ar'
 
-  // 1. قائمة الملفات (تم تحديثها لتطابق أسماء الملفات التي رفعتها بالضبط)
+  // 1. قائمة الملفات
   const oqeOemFiles = [
-    { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation Pneumatique.pdf" },
+    { title: "Présentation Pneumatique M204 OQE OEM", file: "/OQEOEM_Presentation%20Pneumatique.pdf" },
     { title: "Manuel de cours (Entretien)", file: "/OQEOEM_cours_TEI.pdf" },
     { title: "Accessoires de transmission", file: "/OQEOEM_Accessoires.pdf" }
   ]
 
-  // 2. التحقق: إذا كان الكود يحتوي على OQE أو OEM (سواء بمسافة أو بدون)
-  const upperCode = decodedCode.toUpperCase();
-  const isTargetSpecialty = upperCode.includes("OQE") || upperCode.includes("OEM");
-  
-  // 3. تحديد الملفات التي سيتم عرضها
-  const currentFiles = isTargetSpecialty ? oqeOemFiles : null;
+  // 2. المطابقة الذكية: أي كود يحتوي على الكلمات المفتاحية كجزء مستقل
+  const upperCode = decodedCode.toUpperCase().trim()
+  const isTargetSpecialty = /\b(OQOEM|OQE|OEM|GE|EI)\b/i.test(upperCode)
+
+  // 3. تحديد الملفات المعروضة
+  const currentFiles = isTargetSpecialty ? oqeOemFiles : null
 
   return (
     <main className="min-h-screen p-6 bg-slate-50">
       <ModuleAdOverlay />
 
       <div className="max-w-4xl mx-auto pt-10">
-        
+
         <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-8 transition-colors">
           {isAr ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
           {isAr ? "العودة للرئيسية" : "Retour à l'accueil"}
@@ -51,20 +51,20 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
 
         {/* القسم الثاني: عرض الملفات أو رسالة عدم التوفر */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center flex flex-col items-center min-h-[300px]">
-          
+
           {currentFiles ? (
             <div className="w-full">
               <Download size={48} className="text-blue-500 mb-6 mx-auto" />
               <h2 className="text-2xl font-bold text-gray-700 mb-6">
                 {isAr ? "الملفات متوفرة للتحميل" : "Fichiers disponibles au téléchargement"}
               </h2>
-              
+
               <div className="flex flex-col gap-3 max-w-2xl mx-auto">
                 {currentFiles.map((item, index) => (
-                  <a 
+                  <a
                     key={index}
-                    href={item.file} 
-                    target="_blank" 
+                    href={item.file}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="bg-blue-50 border border-blue-200 text-blue-700 font-bold py-3 px-4 rounded-lg hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-between group text-left"
                     dir="ltr"
@@ -85,7 +85,7 @@ export default async function ModulePage({ params }: { params: Promise<{ code: s
                 {isAr ? "المحتوى غير متوفر حالياً" : "Cours non encore disponible"}
               </h2>
               <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
-                {isAr 
+                {isAr
                   ? "لم يتم رفع ملف PDF الخاص بهذه الوحدة بعد. يرجى العودة لاحقاً."
                   : "Le fichier PDF de ce module n'a pas encore été téléchargé. Veuillez revenir plus tard."}
               </p>

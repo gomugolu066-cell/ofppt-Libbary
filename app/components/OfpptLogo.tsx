@@ -1,6 +1,6 @@
-export default function OfpptLogo() {
+export default function OfpptLogo({ className = "" }: { className?: string }) {
   return (
-    <div style={{ width: '60px', height: 'auto', margin: '0 auto' }}>
+    <div style={{ width: '50px', height: 'auto' }} className={`mx-auto flex justify-center ${className}`}>
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 500 400" 
@@ -8,7 +8,6 @@ export default function OfpptLogo() {
         aria-label="OFPPT Logo"
       >
         <defs>
-          {/* حركة نزول الكتابة من خلف المعينات إلى الأسفل */}
           <style>
             {`
               @keyframes slideDownText {
@@ -65,7 +64,7 @@ export default function OfpptLogo() {
           d="M 360 90 L 470 200 L 360 310 L 250 200 Z M 360 140 L 420 200 L 360 260 L 300 200 Z" 
         />
 
-        {/* الكتابة OFPPT - تنزل من الخلف إلى الأسفل */}
+        {/* الكتابة OFPPT - تنزل من الخلف */}
         <text 
           className="anim-text-down"
           x="250" 

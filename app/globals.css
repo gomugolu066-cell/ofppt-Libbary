@@ -1,87 +1,69 @@
-22:55:56.107 Running build in Washington, D.C., USA (East) – iad1
-22:55:56.107 Build machine configuration: 2 cores, 8 GB
-22:55:56.234 Cloning github.com/gomugolu066-cell/ofppt-Libbary (Branch: main, Commit: f4e66db)
-22:55:57.197 Cloning completed: 963.000ms
-22:55:57.256 Skipping build cache since Node.js version changed from "26.x" to "24.x"
-22:55:57.547 Running "vercel build"
-22:55:57.556 Vercel CLI 66.2.0
-22:55:57.819 Installing dependencies...
-22:55:58.356 npm warn Unknown env config "cache-dir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
-22:56:23.753 npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
-22:56:27.473 
-22:56:27.473 added 358 packages in 30s
-22:56:27.473 
-22:56:27.473 148 packages are looking for funding
-22:56:27.473   run `npm fund` for details
-22:56:27.528 Detected Next.js version: 15.5.29
-22:56:27.537 Running "npm run build"
-22:56:27.648 npm warn Unknown env config "cache-dir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
-22:56:27.667 
-22:56:27.668 > ofppt-library@0.1.0 build
-22:56:27.668 > next build
-22:56:27.668 
-22:56:28.583 Attention: Next.js now collects completely anonymous telemetry regarding usage.
-22:56:28.583 This information is used to shape Next.js' roadmap and prioritize features.
-22:56:28.583 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-22:56:28.583 https://nextjs.org/telemetry
-22:56:28.583 
-22:56:28.664    ▲ Next.js 15.5.29
-22:56:28.664 
-22:56:28.724    Creating an optimized production build ...
-22:56:36.408 <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/vercel/path0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!/vercel/path0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!/vercel/path0/app/globals.css': No serializer registered for PostCSSSyntaxError
-22:56:36.409 <w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
-22:56:36.531 Failed to compile.
-22:56:36.531 
-22:56:36.532 ./app/globals.css:1:1
-22:56:36.532 Syntax error: /vercel/path0/app/globals.css Unknown word
-22:56:36.532 
-22:56:36.532 > 1 | ```css
-22:56:36.532     | ^
-22:56:36.532   2 | @tailwind base;
-22:56:36.532   3 | @tailwind components;
-22:56:36.532 
-22:56:36.533 ./app/globals.css
-22:56:36.533 Syntax error: /vercel/path0/app/globals.css Unknown word (1:1)
-22:56:36.533 
-22:56:36.533 > 1 | ```css
-22:56:36.533     | ^
-22:56:36.533   2 | @tailwind base;
-22:56:36.533   3 | @tailwind components;
-22:56:36.533 
-22:56:36.533     at tryRunOrWebpackError (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:316119)
-22:56:36.534     at __webpack_require_module__ (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:131532)
-22:56:36.534     at __nested_webpack_require_161494__ (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:130967)
-22:56:36.534     at /vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:131824
-22:56:36.534     at symbolIterator (/vercel/path0/node_modules/next/dist/compiled/neo-async/async.js:1:14444)
-22:56:36.534     at done (/vercel/path0/node_modules/next/dist/compiled/neo-async/async.js:1:14824)
-22:56:36.534     at Hook.eval [as callAsync] (eval at create (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:15:1)
-22:56:36.534     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:14:6378)
-22:56:36.534     at /vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:130687
-22:56:36.534     at symbolIterator (/vercel/path0/node_modules/next/dist/compiled/neo-async/async.js:1:14402)
-22:56:36.534 -- inner error --
-22:56:36.534 Syntax error: /vercel/path0/app/globals.css Unknown word (1:1)
-22:56:36.534 
-22:56:36.534 > 1 | ```css
-22:56:36.534     | ^
-22:56:36.535   2 | @tailwind base;
-22:56:36.535   3 | @tailwind components;
-22:56:36.535 
-22:56:36.535     at Object.<anonymous> (/vercel/path0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!/vercel/path0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!/vercel/path0/app/globals.css:1:7)
-22:56:36.535     at /vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:962717
-22:56:36.535     at Hook.eval [as call] (eval at create (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:14:9002), <anonymous>:7:1)
-22:56:36.535     at Hook.CALL_DELEGATE [as _call] (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:14:6272)
-22:56:36.535     at /vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:131565
-22:56:36.535     at tryRunOrWebpackError (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:316073)
-22:56:36.535     at __webpack_require_module__ (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:131532)
-22:56:36.535     at __nested_webpack_require_161494__ (/vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:130967)
-22:56:36.535     at /vercel/path0/node_modules/next/dist/compiled/webpack/bundle5.js:29:131824
-22:56:36.535     at symbolIterator (/vercel/path0/node_modules/next/dist/compiled/neo-async/async.js:1:14444)
-22:56:36.535 
-22:56:36.535 Generated code for /vercel/path0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!/vercel/path0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!/vercel/path0/app/globals.css
-22:56:36.535 
-22:56:36.535 Import trace for requested module:
-22:56:36.535 ./app/globals.css
-22:56:36.535 
-22:56:36.535 
-22:56:36.536 > Build failed because of webpack errors
-22:56:36.569 Error: [BUILD_UTILS_SPAWN_1] Command "npm run build" exited with 1
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Animations */
+@keyframes paperAnim {
+  0% { transform: translateY(15px); opacity: 0; }
+  20% { transform: translateY(-12px); opacity: 1; }
+  80% { transform: translateY(-12px); opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0; }
+}
+.anim-paper {
+  animation: paperAnim 3s ease-in-out infinite;
+}
+
+@keyframes sparkAnim {
+  0%, 100% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+.anim-spark {
+  animation: sparkAnim 1s ease-in-out infinite;
+}
+
+@keyframes glowAnim {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(234,179,8,0.5));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(234,179,8,1));
+    transform: scale(1.15);
+  }
+}
+.anim-glow {
+  animation: glowAnim 1.5s ease-in-out infinite;
+}
+
+@keyframes spinAnim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.anim-spin {
+  animation: spinAnim 3s linear infinite;
+}
+
+@keyframes snipAnim {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+.anim-snip {
+  animation: snipAnim 1.2s ease-in-out infinite;
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.anim-float {
+  animation: floatAnim 2s ease-in-out infinite;
+}

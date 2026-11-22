@@ -16,6 +16,35 @@ const defaultInstitution = institutionRegions
   .flatMap(city => city.institutions)
   .find(institution => institution.id === 'ista-had-soualem') ?? null
 
+function SidebarDiamondPattern() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 300 900"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute inset-0 h-full w-full"
+    >
+      <g stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.18">
+        <polygon
+          points="150,0 300,150 150,300 0,150"
+          fill="#60A5FA"
+          fillOpacity="0.19"
+        />
+        <polygon
+          points="150,300 300,450 150,600 0,450"
+          fill="#159B65"
+          fillOpacity="0.22"
+        />
+        <polygon
+          points="150,600 300,750 150,900 0,750"
+          fill="#94A3B8"
+          fillOpacity="0.24"
+        />
+      </g>
+    </svg>
+  )
+}
+
 export default function Sidebar({ lang }: SidebarProps) {
   const isAr = lang === 'ar'
 
@@ -148,7 +177,6 @@ export default function Sidebar({ lang }: SidebarProps) {
               return (
                 <div key={region.id}>
 
-                  {/* Region */}
                   <button
                     type="button"
                     onClick={() => {
@@ -184,7 +212,6 @@ export default function Sidebar({ lang }: SidebarProps) {
                         return (
                           <div key={city.id}>
 
-                            {/* City */}
                             <button
                               type="button"
                               onClick={() => setOpenCity(isCityOpen ? null : city.id)}
@@ -203,7 +230,6 @@ export default function Sidebar({ lang }: SidebarProps) {
                               </svg>
                             </button>
 
-                            {/* Institutions in City */}
                             {isCityOpen && (
                               <div className="ms-3 ps-3 border-s border-white/15 space-y-2 mt-1">
 
@@ -371,41 +397,50 @@ export default function Sidebar({ lang }: SidebarProps) {
         </button>
 
         {mobileOpen && (
-          <div className="mt-3 rounded-2xl bg-[#004B92] border border-blue-800 p-3 shadow-xl">
-            {menu}
+          <div className="relative isolate overflow-hidden mt-3 rounded-2xl bg-[#004B92] border border-blue-800 p-3 shadow-xl">
+            <SidebarDiamondPattern />
+            <div className="relative z-10">
+              {menu}
+            </div>
           </div>
         )}
       </div>
 
       {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-72 shrink-0">
-        <div className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto rounded-2xl bg-[#004B92] p-4 shadow-xl shadow-blue-950/15 border border-blue-800/50">
+        <div className="relative isolate overflow-hidden sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto rounded-2xl bg-[#004B92] p-4 shadow-xl shadow-blue-950/15 border border-blue-800/50">
 
-          {/* Brand */}
-          <div className="flex items-center gap-3 px-3 py-4 mb-4 border-b border-white/15">
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-md">
-              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-[#004B92]" stroke="currentColor" strokeWidth="1.8">
-                <path d="M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="absolute -right-1 -top-1 w-3 h-3 rounded-full bg-[#159B65] border-2 border-[#004B92]"/>
+          <SidebarDiamondPattern />
+
+          <div className="relative z-10">
+
+            {/* Brand */}
+            <div className="flex items-center gap-3 px-3 py-4 mb-4 border-b border-white/15">
+              <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-md">
+                <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-[#004B92]" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="absolute -right-1 -top-1 w-3 h-3 rounded-full bg-[#159B65] border-2 border-[#004B92]"/>
+              </div>
+
+              <div className="min-w-0">
+                <h2 className="text-lg font-extrabold text-white tracking-tight">
+                  OFPPT Library
+                </h2>
+                <p className="text-[10px] text-blue-200 mt-0.5">
+                  {isAr ? 'منصتك التعليمية الرقمية' : 'Digital Learning Platform'}
+                </p>
+              </div>
             </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-extrabold text-white tracking-tight">
-                OFPPT Library
-              </h2>
-              <p className="text-[10px] text-blue-200 mt-0.5">
-                {isAr ? 'منصتك التعليمية الرقمية' : 'Digital Learning Platform'}
+            {menu}
+
+            <div className="mt-5 pt-3 border-t border-white/10 text-center">
+              <p className="text-[9px] text-blue-200/50 tracking-widest">
+                OFPPT DIGITAL LIBRARY
               </p>
             </div>
-          </div>
 
-          {menu}
-
-          <div className="mt-5 pt-3 border-t border-white/10 text-center">
-            <p className="text-[9px] text-blue-200/50 tracking-widest">
-              OFPPT DIGITAL LIBRARY
-            </p>
           </div>
         </div>
       </aside>

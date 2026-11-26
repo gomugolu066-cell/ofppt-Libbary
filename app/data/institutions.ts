@@ -1,8 +1,17 @@
-export type InstitutionType = 'ISTA' | 'CMC'
+
+export type InstitutionType =
+  | 'ISTA'
+  | 'ITA'
+  | 'CMC'
+  | 'ISGI'
+  | 'ISHT'
+  | 'ISHR'
 
 export type Institution = {
   id: string
   name: string
+  nameAr?: string
+  nameFr?: string
   type: InstitutionType
   city: string
   mapsQuery: string
@@ -23,6 +32,57 @@ export type InstitutionRegion = {
   cities: InstitutionCity[]
 }
 
+export const institutionTypeLabels: Record<
+  InstitutionType,
+  { ar: string; fr: string; descriptionAr: string; descriptionFr: string }
+> = {
+  ISTA: {
+    ar: 'المعاهد المتخصصة للتكنولوجيا التطبيقية',
+    fr: 'Instituts Spécialisés de Technologie Appliquée',
+    descriptionAr: 'ISTA',
+    descriptionFr: 'ISTA'
+  },
+  ITA: {
+    ar: 'معاهد التكنولوجيا التطبيقية',
+    fr: 'Instituts de Technologie Appliquée',
+    descriptionAr: 'ITA',
+    descriptionFr: 'ITA'
+  },
+  CMC: {
+    ar: 'مدن المهن والكفاءات',
+    fr: 'Cités des Métiers et des Compétences',
+    descriptionAr: 'CMC',
+    descriptionFr: 'CMC'
+  },
+  ISGI: {
+    ar: 'معاهد التسيير والإعلاميات',
+    fr: 'Instituts de Gestion et d’Informatique',
+    descriptionAr: 'ISGI',
+    descriptionFr: 'ISGI'
+  },
+  ISHT: {
+    ar: 'معاهد الفندقة والسياحة',
+    fr: 'Instituts Spécialisés en Hôtellerie et Tourisme',
+    descriptionAr: 'ISHT',
+    descriptionFr: 'ISHT'
+  },
+  ISHR: {
+    ar: 'معاهد الفندقة والمطعمة',
+    fr: 'Instituts Spécialisés en Hôtellerie et Restauration',
+    descriptionAr: 'ISHR',
+    descriptionFr: 'ISHR'
+  }
+}
+
+export const institutionTypeOrder: InstitutionType[] = [
+  'ISTA',
+  'ITA',
+  'CMC',
+  'ISGI',
+  'ISHT',
+  'ISHR'
+]
+
 export const institutionRegions: InstitutionRegion[] = [
   {
     id: 'tanger-tetouan-al-hoceima',
@@ -37,6 +97,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-tanger',
             name: 'Cité des Métiers et des Compétences Tanger-Tétouan-Al Hoceima',
+            nameAr: 'مدينة المهن والكفاءات طنجة تطوان الحسيمة',
+            nameFr: 'Cité des Métiers et des Compétences Tanger-Tétouan-Al Hoceima',
             type: 'CMC',
             city: 'Tanger',
             mapsQuery: 'CMC Tanger Morocco',
@@ -65,6 +127,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-nador',
             name: 'Cité des Métiers et des Compétences Nador',
+            nameAr: 'مدينة المهن والكفاءات الناظور',
+            nameFr: 'Cité des Métiers et des Compétences Nador',
             type: 'CMC',
             city: 'Nador',
             mapsQuery: 'CMC Nador Morocco',
@@ -73,6 +137,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-nador',
             name: 'Institut Spécialisé de Technologie Appliquée Nador',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية الناظور',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Nador',
             type: 'ISTA',
             city: 'Nador',
             mapsQuery: 'ISTA Nador Morocco',
@@ -101,6 +167,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-fes',
             name: 'Cités des Métiers et des Compétences Fès-Meknès',
+            nameAr: 'مدينة المهن والكفاءات فاس مكناس',
+            nameFr: 'Cité des Métiers et des Compétences Fès-Meknès',
             type: 'CMC',
             city: 'Fès',
             mapsQuery: 'CMC Fes Morocco',
@@ -116,6 +184,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-gestion-meknes',
             name: 'Institut Spécialisé de Technologie Appliquée de Gestion Bab Tizimi',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية للتسيير باب تيزيمي',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée de Gestion Bab Tizimi',
             type: 'ISTA',
             city: 'Meknès',
             mapsQuery: 'ISTA Gestion Bab Tizimi Meknes Morocco',
@@ -138,6 +208,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-rabat',
             name: 'Cité des Métiers et des Compétences Rabat',
+            nameAr: 'مدينة المهن والكفاءات الرباط',
+            nameFr: 'Cité des Métiers et des Compétences Rabat',
             type: 'CMC',
             city: 'Rabat',
             mapsQuery: 'CMC Rabat Morocco',
@@ -146,6 +218,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-hay-riad-rabat',
             name: 'Institut Spécialisé de Technologie Appliquée Hay Riad',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية حي الرياض',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Hay Riad',
             type: 'ISTA',
             city: 'Rabat',
             mapsQuery: 'ISTA Hay Riad Rabat Morocco',
@@ -180,6 +254,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-beni-mellal',
             name: 'Cité des Métiers et des Compétences Béni Mellal-Khénifra',
+            nameAr: 'مدينة المهن والكفاءات بني ملال خنيفرة',
+            nameFr: 'Cité des Métiers et des Compétences Béni Mellal-Khénifra',
             type: 'CMC',
             city: 'Béni Mellal',
             mapsQuery: 'CMC Beni Mellal Morocco',
@@ -202,6 +278,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-casablanca-settat',
             name: 'Cité des Métiers et des Compétences Casablanca-Settat',
+            nameAr: 'مدينة المهن والكفاءات الدار البيضاء سطات',
+            nameFr: 'Cité des Métiers et des Compétences Casablanca-Settat',
             type: 'CMC',
             city: 'Nouaceur',
             mapsQuery: 'CMC Casablanca Settat Nouaceur Morocco',
@@ -217,6 +295,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-had-soualem',
             name: 'ISTA Had Soualem',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية حد السوالم',
+            nameFr: 'ISTA Had Soualem',
             type: 'ISTA',
             city: 'Had Soualem',
             mapsQuery: 'ISTA Had Soualem Morocco',
@@ -232,6 +312,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-ben-msik',
             name: 'Institut Spécialisé de Technologie Appliquée Industriel Ben M’Sik',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية الصناعي ابن مسيك',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Industriel Ben M’Sik',
             type: 'ISTA',
             city: 'Casablanca',
             mapsQuery: 'ISTA Industriel Ben M Sik Casablanca Morocco',
@@ -240,6 +322,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-sidi-bernouissi',
             name: 'Institut Spécialisé de Technologie Appliquée Sidi Bernoussi',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية سيدي البرنوصي',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Sidi Bernoussi',
             type: 'ISTA',
             city: 'Casablanca',
             mapsQuery: 'ISTA Sidi Bernoussi Casablanca Morocco',
@@ -248,6 +332,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-sidi-moumen',
             name: 'Institut Spécialisé de Technologie Appliquée Sidi Moumen',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية سيدي مومن',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Sidi Moumen',
             type: 'ISTA',
             city: 'Casablanca',
             mapsQuery: 'ISTA Sidi Moumen Casablanca Morocco',
@@ -256,6 +342,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-hay-hassani-2',
             name: 'Institut Spécialisé de Technologie Appliquée Hay Hassani 2',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية الحي الحسني 2',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Hay Hassani 2',
             type: 'ISTA',
             city: 'Casablanca',
             mapsQuery: 'ISTA Hay Hassani 2 Casablanca Morocco',
@@ -264,6 +352,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-ntic-sidi-maarouf',
             name: 'Institut Spécialisé de Technologie Appliquée NTIC Sidi Maarouf',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية للتكنولوجيات الحديثة سيدي معروف',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée NTIC Sidi Maarouf',
             type: 'ISTA',
             city: 'Casablanca',
             mapsQuery: 'ISTA NTIC Sidi Maarouf Casablanca Morocco',
@@ -279,7 +369,9 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-port-mohammedia',
             name: 'Institut de Technologie Appliquée Port Mohammedia',
-            type: 'ISTA',
+            nameAr: 'معهد التكنولوجيا التطبيقية ميناء المحمدية',
+            nameFr: 'Institut de Technologie Appliquée Port Mohammedia',
+            type: 'ITA',
             city: 'Mohammedia',
             mapsQuery: 'Institut de Technologie Appliquee Port Mohammedia Morocco',
             coursesAvailable: false
@@ -294,6 +386,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-berrechid',
             name: 'Institut Spécialisé de Technologie Appliquée Berrechid',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية برشيد',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Berrechid',
             type: 'ISTA',
             city: 'Berrechid',
             mapsQuery: 'ISTA Berrechid Morocco',
@@ -309,6 +403,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-settat',
             name: 'ISTA 1 Settat',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية 1 سطات',
+            nameFr: 'ISTA 1 Settat',
             type: 'ISTA',
             city: 'Settat',
             mapsQuery: 'ISTA 1 Settat Morocco',
@@ -324,6 +420,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-ben-slimane',
             name: 'Institut Spécialisé de Technologie Appliquée Ben Slimane',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية بن سليمان',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Ben Slimane',
             type: 'ISTA',
             city: 'Ben Slimane',
             mapsQuery: 'ISTA Ben Slimane Morocco',
@@ -332,13 +430,15 @@ export const institutionRegions: InstitutionRegion[] = [
         ]
       },
       {
-        id: 'el-jadida',
-        nameAr: 'الجديدة',
-        nameFr: 'El Jadida',
+        id: 'jorf-lasfar',
+        nameAr: 'الجرف الأصفر',
+        nameFr: 'Jorf Lasfar',
         institutions: [
           {
             id: 'ista-jorf-lasfar',
             name: 'Institut Spécialisé de Technologie Appliquée Jorf Lasfar',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية الجرف الأصفر',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Jorf Lasfar',
             type: 'ISTA',
             city: 'Jorf Lasfar',
             mapsQuery: 'ISTA Jorf Lasfar Morocco',
@@ -361,6 +461,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-marrakech',
             name: 'Cité des Métiers et des Compétences Marrakech-Safi',
+            nameAr: 'مدينة المهن والكفاءات مراكش آسفي',
+            nameFr: 'Cité des Métiers et des Compétences Marrakech-Safi',
             type: 'CMC',
             city: 'Marrakech',
             mapsQuery: 'CMC Marrakech Morocco',
@@ -376,7 +478,9 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-hotellerie-safi',
             name: 'Institut Spécialisé de Technologie en Hôtellerie et de Tourisme Safi',
-            type: 'ISTA',
+            nameAr: 'المعهد المتخصص للتكنولوجيا في الفندقة والسياحة آسفي',
+            nameFr: 'Institut Spécialisé de Technologie en Hôtellerie et de Tourisme Safi',
+            type: 'ISHT',
             city: 'Safi',
             mapsQuery: 'ISTA Hotellerie Tourisme Safi Morocco',
             coursesAvailable: false
@@ -404,6 +508,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-agadir',
             name: 'Cité des Métiers et des Compétences Agadir',
+            nameAr: 'مدينة المهن والكفاءات أكادير',
+            nameFr: 'Cité des Métiers et des Compétences Agadir',
             type: 'CMC',
             city: 'Agadir',
             mapsQuery: 'CMC Agadir Morocco',
@@ -412,6 +518,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-agadir',
             name: 'Institut Spécialisé de Technologie Appliquée Agadir',
+            nameAr: 'المعهد المتخصص للتكنولوجيا التطبيقية أكادير',
+            nameFr: 'Institut Spécialisé de Technologie Appliquée Agadir',
             type: 'ISTA',
             city: 'Agadir',
             mapsQuery: 'ISTA Agadir Morocco',
@@ -434,7 +542,9 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'ista-hotellerie-guelmim',
             name: 'Institut Spécialisé de l’Hôtellerie et de Tourisme Guelmim',
-            type: 'ISTA',
+            nameAr: 'المعهد المتخصص للفندقة والسياحة كلميم',
+            nameFr: 'Institut Spécialisé de l’Hôtellerie et de Tourisme Guelmim',
+            type: 'ISHT',
             city: 'Guelmim',
             mapsQuery: 'Institut Specialise Hotellerie Tourisme Guelmim Morocco',
             coursesAvailable: false
@@ -456,6 +566,8 @@ export const institutionRegions: InstitutionRegion[] = [
           {
             id: 'cmc-laayoune',
             name: 'Cité des Métiers et des Compétences Laayoune',
+            nameAr: 'مدينة المهن والكفاءات العيون',
+            nameFr: 'Cité des Métiers et des Compétences Laayoune',
             type: 'CMC',
             city: 'Laâyoune',
             mapsQuery: 'CMC Laayoune Morocco',

@@ -17,6 +17,7 @@ const defaultInstitution = institutionRegions
   .flatMap(city => city.institutions)
   .find(institution => institution.id === 'ista-had-soualem') ?? null
 
+// Geometric background matching the agreed sidebar design
 function SidebarDiamondPattern() {
   return (
     <svg
@@ -25,22 +26,85 @@ function SidebarDiamondPattern() {
       preserveAspectRatio="none"
       className="pointer-events-none absolute inset-0 h-full w-full"
     >
-      <g stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.18">
-        <polygon
-          points="150,0 300,150 150,300 0,150"
+      <defs>
+        <linearGradient id="sidebarLineGreen" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#00C878" stopOpacity="0.05" />
+          <stop offset="50%" stopColor="#00D18B" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#00C878" stopOpacity="0.05" />
+        </linearGradient>
+
+        <linearGradient id="sidebarLineBlue" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.05" />
+          <stop offset="50%" stopColor="#60A5FA" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+
+      <g fill="none" strokeWidth="1.5">
+
+        {/* Large diagonal geometric lines */}
+        <path
+          d="M-150 0 L150 270 L450 0"
+          stroke="url(#sidebarLineBlue)"
+        />
+
+        <path
+          d="M-150 230 L150 500 L450 230"
+          stroke="url(#sidebarLineGreen)"
+        />
+
+        <path
+          d="M-150 470 L150 740 L450 470"
+          stroke="url(#sidebarLineBlue)"
+        />
+
+        <path
+          d="M-150 710 L150 980 L450 710"
+          stroke="url(#sidebarLineGreen)"
+        />
+
+        {/* Crossing diagonal lines */}
+        <path
+          d="M450 0 L150 270 L-150 0"
+          stroke="#60A5FA"
+          strokeOpacity="0.20"
+        />
+
+        <path
+          d="M450 230 L150 500 L-150 230"
+          stroke="#00D18B"
+          strokeOpacity="0.22"
+        />
+
+        <path
+          d="M450 470 L150 740 L-150 470"
+          stroke="#94A3B8"
+          strokeOpacity="0.24"
+        />
+
+        <path
+          d="M450 710 L150 980 L-150 710"
+          stroke="#60A5FA"
+          strokeOpacity="0.20"
+        />
+
+        {/* Central geometric diamond */}
+        <path
+          d="M150 350 L300 480 L150 610 L0 480 Z"
+          fill="#00A878"
+          fillOpacity="0.035"
+          stroke="#00B88A"
+          strokeOpacity="0.18"
+        />
+
+        <path
+          d="M150 590 L300 720 L150 850 L0 720 Z"
           fill="#60A5FA"
-          fillOpacity="0.19"
+          fillOpacity="0.035"
+          stroke="#93C5FD"
+          strokeOpacity="0.20"
         />
-        <polygon
-          points="150,300 300,450 150,600 0,450"
-          fill="#159B65"
-          fillOpacity="0.22"
-        />
-        <polygon
-          points="150,600 300,750 150,900 0,750"
-          fill="#94A3B8"
-          fillOpacity="0.24"
-        />
+
       </g>
     </svg>
   )
@@ -51,7 +115,6 @@ export default function Sidebar({ lang }: SidebarProps) {
 
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // المؤسسات والجهات والمدن مغلقة عند البداية
   const [institutionsOpen, setInstitutionsOpen] = useState(false)
   const [openRegion, setOpenRegion] = useState<string | null>(null)
   const [openCity, setOpenCity] = useState<string | null>(null)
@@ -339,7 +402,7 @@ export default function Sidebar({ lang }: SidebarProps) {
       </div>
 
       {/* Selected Institution */}
-      <div className="mt-4 rounded-xl border border-white/15 bg-[#1E5D98] p-3">
+      <div className="mt-4 rounded-xl border border-white/15 bg-[#1E5D98]/80 p-3">
         <div className="flex items-center gap-2 mb-2">
           <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#159B65]/20 text-[#65D6A3]">
             <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.8">
@@ -411,7 +474,7 @@ export default function Sidebar({ lang }: SidebarProps) {
             {isAr ? 'القائمة الرئيسية' : 'Navigation Menu'}
           </span>
 
-          <svg viewBox="0 0 24 24" fill="none" className={`w-5 h-5 transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`} stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 transition-transform duration-300" stroke="currentColor" strokeWidth="2">
             <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
@@ -435,12 +498,12 @@ export default function Sidebar({ lang }: SidebarProps) {
           className="absolute inset-0 w-full h-full bg-black/55 backdrop-blur-[2px]"
         />
 
-        {/* Sliding Sidebar */}
+        {/* Sliding Sidebar: enters from the right */}
         <aside
           id="mobile-sidebar"
           dir={isAr ? 'rtl' : 'ltr'}
           aria-hidden={!mobileOpen}
-          className={`absolute top-0 bottom-0 w-[min(82vw,300px)] overflow-x-hidden overflow-y-auto overscroll-contain bg-gradient-to-b from-[#00396F] via-[#00477F] to-[#002A55] p-3 shadow-2xl border-white/10 transition-transform duration-300 ease-in-out ${
+          className={`absolute top-0 bottom-0 w-[min(82vw,300px)] overflow-x-hidden overflow-y-auto overscroll-contain bg-gradient-to-b from-[#00396F] via-[#00477F] to-[#002A55] p-3 shadow-2xl border-white/10 transition-transform duration-300 ease-out ${
             isAr
               ? 'right-0 border-l'
               : 'left-0 border-r'
@@ -508,7 +571,7 @@ export default function Sidebar({ lang }: SidebarProps) {
 
       {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-72 shrink-0">
-        <div className="relative isolate sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto overflow-x-hidden rounded-2xl bg-[#004B92] p-4 shadow-xl shadow-blue-950/15 border border-blue-800/50">
+        <div className="relative isolate sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto overflow-x-hidden rounded-2xl bg-gradient-to-b from-[#00396F] via-[#00477F] to-[#002A55] p-4 shadow-xl shadow-blue-950/15 border border-blue-800/50">
 
           <SidebarDiamondPattern />
 

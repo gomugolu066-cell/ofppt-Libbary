@@ -1,86 +1,104 @@
 
-import { cookies } from 'next/headers'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { institutionRegions } from '@/app/data/institutions'
-import SpecialtyTree from '@/app/components/SpecialtyTree'
-import Sidebar from '@/app/components/Sidebar'
-import LanguageSwitcher from '@/app/components/LanguageSwitcher'
-import OfpptLogo from '@/app/components/OfpptLogo'
-import { ArrowRight, ArrowLeft, GraduationCap } from 'lucide-react'
-
-type PageProps = {
-  params: Promise<{ id: string }>
+export type InstitutionBranch = {
+  id: string
+  nameAr: string
+  nameFr: string
+  modules: string[]
 }
 
-export default async function InstitutionPage({ params }: PageProps) {
-  const { id } = await params
+export type InstitutionSpecialty = {
+  id: string
+  nameAr: string
+  nameFr: string
+  branches: InstitutionBranch[]
+}
 
-  const institution = institutionRegions
-    .flatMap(region => region.cities)
-    .flatMap(city => city.institutions)
-    .find(item => item.id === id)
-
-  if (!institution) {
-    notFound()
+function makeBranch(
+  id: string,
+  nameAr: string,
+  nameFr: string
+): InstitutionBranch {
+  return {
+    id,
+    nameAr,
+    nameFr,
+    modules: [],
   }
+}
 
-  const cookieStore = await cookies()
-  const lang = cookieStore.get('lang')?.value || 'ar'
-  const isAr = lang === 'ar'
+function makeSpecialty(
+  id: string,
+  nameAr: string,
+  nameFr: string
+): InstitutionSpecialty {
+  return {
+    id,
+    nameAr,
+    nameFr,
+    branches: [
+      makeBranch(`${id}_branch`, nameAr, nameFr),
+    ],
+  }
+}
 
-  const institutionName = isAr
-    ? institution.nameAr || institution.name
-    : institution.nameFr || institution.name
+export const institutionCurricula: Record<
+  string,
+  InstitutionSpecialty[]
+> = {
+  "cmc-casablanca-settat": [
+    makeSpecialty(
+      "production-agricole",
+      "الإنتاج الفلاحي",
+      "Production Agricole"
+    ),
+    makeSpecialty(
+      "menuiserie-art",
+      "نجارة الفن",
+      "Menuiserie d’art"
+    ),
+  ],
 
-  return (
-    <main className="min-h-screen p-6 relative bg-slate-50">
-      <LanguageSwitcher currentLang={lang} />
+  "cmc-beni-mellal": [
+    makeSpecialty(
+      "tapis",
+      "صناعة الزرابي",
+      "Tapis"
+    ),
+  ],
 
-      <div className="max-w-7xl mx-auto pt-8">
-        <div className={`flex flex-col lg:items-start gap-6 ${
-          isAr ? 'lg:flex-row-reverse' : 'lg:flex-row'
-        }`}>
-          <Sidebar lang={lang} />
+  "ista-sidi-moumen": [
+    makeSpecialty(
+      "electricite-maintenance-industrielle",
+      "كهرباء الصيانة الصناعية",
+      "Électricité de Maintenance Industrielle"
+    ),
+    makeSpecialty(
+      "fabrication-mecanique",
+      "التصنيع الميكانيكي",
+      "Fabrication Mécanique"
+    ),
+    makeSpecialty(
+      "reparation-engins-automobile",
+      "إصلاح محركات السيارات",
+      "Réparation des Engins à Moteur - Option Automobile"
+    ),
+    makeSpecialty(
+      "electromecanique-systemes-automatises",
+      "الكهروميكانيك والأنظمة الآلية",
+      "Électromécanique des Systèmes Automatisés"
+    ),
+  ],
 
-          <div className="flex-1 min-w-0 w-full">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
-            >
-              {isAr ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
-              {isAr ? 'العودة إلى الصفحة الرئيسية' : 'Retour à l’accueil'}
-            </Link>
-
-            <header className="text-center mb-10 flex flex-col items-center">
-              <div className="mb-4 flex justify-center w-full">
-                <OfpptLogo />
-              </div>
-
-              <div className="w-16 h-16 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
-                <GraduationCap size={34} />
-              </div>
-
-              <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-3">
-                {institutionName}
-              </h1>
-
-              <p className="text-gray-600 text-lg">
-                {isAr
-                  ? 'التخصصات والفروع المتاحة في هذه المؤسسة'
-                  : 'Spécialités et branches de cet établissement'}
-              </p>
-            </header>
-
-            <section>
-              <SpecialtyTree
-                lang={lang}
-                institutionId={institution.id}
-              />
-            </section>
-          </div>
-        </div>
-      </div>
-    </main>
-  )
+  "ista-nador": [
+    makeSpecialty(
+      "assistant-administratif-comptabilite",
+      "مساعد إداري خيار المحاسبة",
+      "Assistant Administratif - Option Comptabilité"
+    ),
+    makeSpecialty(
+      "gestion-entreprises-comptabilite-finance",
+      "تسيير المقاولات خيار المحاسبة والمالية",
+      "Gestion des Entreprises - Option Comptabilité et Finance"
+    ),
+  ],
 }
